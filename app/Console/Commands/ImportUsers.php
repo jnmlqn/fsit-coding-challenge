@@ -44,7 +44,7 @@ class ImportUsers extends Command
      */
     public function handle()
     {
-        if ($this->customerService->importUsers()) {
+        if ($this->customerService->import()) {
             $this->info('100 users were successfully imported to database');
 
             return 0;

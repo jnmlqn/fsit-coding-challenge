@@ -24,9 +24,9 @@ class CustomerService implements CustomerServiceInterface
     /**
      * @return bool
      */
-    public function importUsers(): bool
+    public function import(): bool
     {
-        return $this->customerRepository->importUsers();
+        return $this->customerRepository->import();
     }
 
     /**

@@ -7,15 +7,9 @@ use App\Entities\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Http;
-use Log;
 
 class CustomerRepository implements CustomerRepositoryInterface
 {
-    /**
-     * @var  Http
-     */
-    private Http $http;
-
     /**
      * @var  Database
      */
@@ -27,16 +21,15 @@ class CustomerRepository implements CustomerRepositoryInterface
     private EntityManagerInterface $entityManager;
 
     /**
-     * @param  Customer $customer
+     * @param  Database $db
+     * @param  EntityManagerInterface $entityManager
      * 
      * @return void
      */
     public function __construct(
-        Http $http,
         Database $db,
         EntityManagerInterface $entityManager
     ) {
-        $this->http = $http;
         $this->db = $db;
         $this->entityManager = $entityManager;
     }
@@ -44,10 +37,9 @@ class CustomerRepository implements CustomerRepositoryInterface
     /**
      * @return bool
      */
-    public function importUsers(): bool
+    public function import(): bool
     {
         $response = Http::get('https://randomuser.me/api/?results=100&nat=au');
-        Log::info(sprintf('randomuser.me response: %s', json_encode($response)));
 
         if ($response->ok()) {
             $data = json_decode($response->body(), true);

@@ -9,7 +9,7 @@ interface CustomerRepositoryInterface
     /**
      * @return bool
      */
-    public function importUsers(): bool;
+    public function import(): bool;
 
     /**
      * @return array
